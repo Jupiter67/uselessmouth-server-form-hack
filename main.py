@@ -1,9 +1,10 @@
 import os
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from tqdm import tqdm
 
 from settings import Settings
 
@@ -22,7 +23,6 @@ def init_driver(path: str):
 
 def ahlshtl_vote(driver, link: str = '') -> None:
     driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + 't')
-    print('Open tab!')
 
     driver.get(link)
 
@@ -56,10 +56,8 @@ def ahlshtl_vote(driver, link: str = '') -> None:
     # endregion
 
     driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div/div[1]/div').click()
-    print('Voted!')
 
     driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + 'w')
-    print('Close tab!')
 
 
 if __name__ == '__main__':
@@ -68,5 +66,5 @@ if __name__ == '__main__':
     dirname = os.getcwd()
     path = os.path.join(dirname, 'chromedriver.exe')
     driver = init_driver(path)
-    for i in range(s.retry_count):
+    for i in tqdm(range(s.retry_count)):
         ahlshtl_vote(driver, link=s.form_url)
