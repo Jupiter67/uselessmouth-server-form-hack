@@ -1,3 +1,6 @@
 .idea/
 .github
 settings.yaml
+build
+dist
+*.spec
