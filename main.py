@@ -26,11 +26,36 @@ def ahlshtl_vote(driver, link: str = '') -> None:
 
     driver.get(link)
 
-    ahlshtl_radio = driver.find_element(By.XPATH, '//*[@id="i199"]')
-    ahlshtl_radio.click()
+    # region Vote
+    # Смайл года
+    driver.find_element(By.XPATH, '//*[@id="i305"]').click()
+    # Селфи года
+    driver.find_element(By.XPATH, '//*[@id="i33"]').click()
+    # Клоун года
+    driver.find_element(By.XPATH, '//*[@id="i52"]').click()
+    # Игра года
+    driver.find_element(By.XPATH, '//*[@id="i77"]').click()
+    # Сериал года
+    driver.find_element(By.XPATH, '//*[@id="i111"]').click()
+    # Музыкальный альюом года
+    driver.find_element(By.XPATH, '//*[@id="i154"]').click()
+    # Контентмейкер года
+    driver.find_element(By.XPATH, '//*[@id="i180"]').click()
+    # Админ года
+    driver.find_element(By.XPATH, '//*[@id="i199"]').click()
+    # Канал года
+    driver.find_element(By.XPATH, '//*[@id="i255"]').click()
+    # Вайфу года
+    driver.find_element(By.XPATH, '//*[@id="i286"]').click()
+    # Мем года
+    driver.find_element(By.XPATH, '//*[@id="i305"]').click()
+    # Новичок года
+    driver.find_element(By.XPATH, '//*[@id="i330"]').click()
+    # Нововведение года
+    driver.find_element(By.XPATH, '//*[@id="i380"]').click()
+    # endregion
 
-    submit = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div/div[1]/div')
-    submit.click()
+    driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div/div[1]/div').click()
     print('Voted!')
 
     driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + 'w')
