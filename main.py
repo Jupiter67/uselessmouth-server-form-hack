@@ -21,7 +21,7 @@ def init_driver(path: str):
     return driver
 
 
-def ahlshtl_vote(driver, link: str = '') -> None:
+def vote(driver, link: str = '') -> None:
     driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + 't')
 
     driver.get(link)
@@ -67,4 +67,8 @@ if __name__ == '__main__':
     path = os.path.join(dirname, 'chromedriver.exe')
     driver = init_driver(path)
     for i in tqdm(range(s.retry_count)):
-        ahlshtl_vote(driver, link=s.form_url)
+        try:
+            vote(driver, link=s.form_url)
+        except Exception as e:
+            print(e)
+            continue
