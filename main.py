@@ -5,6 +5,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 
+from settings import Settings
+
 
 def init_driver(path: str):
     option = webdriver.ChromeOptions()
@@ -18,11 +20,11 @@ def init_driver(path: str):
     return driver
 
 
-def ahlshtl_vote(driver) -> None:
+def ahlshtl_vote(driver, link: str = '') -> None:
     driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + 't')
     print('Open tab!')
 
-    driver.get('https://docs.google.com/forms/d/e/1FAIpQLSfH-HOQ1eYWZyDQu1PGbGbSSwOpIjvCK_4us5_O00hiGnuhpQ/viewform')
+    driver.get(link)
 
     ahlshtl_radio = driver.find_element(By.XPATH, '//*[@id="i199"]')
     ahlshtl_radio.click()
@@ -36,8 +38,10 @@ def ahlshtl_vote(driver) -> None:
 
 
 if __name__ == '__main__':
+    s = Settings()
+
     dirname = os.getcwd()
     path = os.path.join(dirname, 'chromedriver.exe')
     driver = init_driver(path)
-    for i in range(100):
-        ahlshtl_vote(driver)
+    for i in range(s.retry_count):
+        ahlshtl_vote(driver, link=s.form_url)
